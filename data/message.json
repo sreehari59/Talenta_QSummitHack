@@ -1,0 +1,106 @@
+[
+  {
+    "name": "Elena Schmidt",
+    "role": "Blockchain Developer",
+    "seniority": "Senior",
+    "description": "Elena is a senior blockchain engineer with 6+ years of experience developing secure and scalable decentralized applications. She has led projects implementing smart contract-based auditing systems for financial institutions.",
+    "certificates": [
+      "Certified Blockchain Developer",
+      "Ethereum Smart Contract Professional"
+    ],
+    "technologies": [
+      "Solidity",
+      "Ethereum",
+      "Hyperledger",
+      "Truffle",
+      "Node.js"
+    ],
+    "languages_spoken": [
+      "English",
+      "German"
+    ]
+  },
+  {
+    "name": "Ravi Mehra",
+    "role": "Security Compliance Analyst",
+    "seniority": "Mid-Level",
+    "description": "Ravi specializes in security protocols and regulatory compliance in fintech systems. He has hands-on experience designing encrypted storage systems and ensuring GDPR and SOX compliance in data pipelines.",
+    "certificates": [
+      "Certified Information Systems Auditor (CISA)",
+      "ISO/IEC 27001 Lead Implementer"
+    ],
+    "technologies": [
+      "OWASP",
+      "TLS/SSL",
+      "Kubernetes Security",
+      "Splunk",
+      "Python"
+    ],
+    "languages_spoken": [
+      "English",
+      "Hindi"
+    ]
+  },
+  {
+    "name": "Yuki Tanaka",
+    "role": "UI Developer",
+    "seniority": "Senior",
+    "description": "Yuki has 8 years of UI/UX design experience, primarily in fintech. She focuses on building intuitive dashboards for financial data and has worked on visualization tools for real-time reporting and audits.",
+    "certificates": [
+      "Google UX Design Certificate"
+    ],
+    "technologies": [
+      "React",
+      "Figma",
+      "TypeScript",
+      "D3.js",
+      "CSS3"
+    ],
+    "languages_spoken": [
+      "Japanese",
+      "English"
+    ]
+  },
+  {
+    "name": "Carlos Dominguez",
+    "role": "Blockchain Architect",
+    "seniority": "Senior",
+    "description": "Carlos has architected enterprise blockchain platforms for supply chain and finance. He is proficient in permissioned blockchain systems and has extensive knowledge of integrating smart contracts with regulatory frameworks.",
+    "certificates": [
+      "Hyperledger Fabric Developer",
+      "Certified Blockchain Architect"
+    ],
+    "technologies": [
+      "Hyperledger Fabric",
+      "Go",
+      "Docker",
+      "Kubernetes",
+      "Smart Contracts"
+    ],
+    "languages_spoken": [
+      "Spanish",
+      "English"
+    ]
+  },
+  {
+    "name": "Amira El-Fahmy",
+    "role": "Full Stack Blockchain Engineer",
+    "seniority": "Mid-Level",
+    "description": "Amira blends backend blockchain experience with front-end development for seamless user interfaces. She’s worked on financial apps integrating smart contracts and responsive UI tailored for financial professionals.",
+    "certificates": [
+      "Blockchain Council Certified Developer"
+    ],
+    "technologies": [
+      "Solidity",
+      "Web3.js",
+      "Vue.js",
+      "MongoDB",
+      "REST APIs"
+    ],
+    "languages_spoken": [
+      "Arabic",
+      "English",
+      "French"
+    ]
+  }
+]
