@@ -38,6 +38,7 @@ def Reco_Sys():
     project_description = df["projectApplication"][2]["projectDetails"]["description"]
     st.info(f"""Project Name: {project_name} \n\n\n Project Description: {project_description}""")
 
+    
     print("Total Number of unique positions:", len(df["projectApplication"][0]["projectDetails"]["requirements"]))
     # for i in range(len(df["projectApplication"][0]["projectDetails"]["requirements"])):
     #     st.info(df["projectApplication"][0]["projectDetails"]["requirements"][i])
@@ -52,7 +53,7 @@ def Reco_Sys():
     
 
     
-    response = rag.retrieve_data(project_details, False)
+    response = rag.retrieve_data(project_details, 5, False)
     print(response["answer"])
     print(response)
 

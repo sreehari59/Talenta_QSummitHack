@@ -1,0 +1,8 @@
+python-dotenv
+Flask
+flask-cors
+langchain-qdrant
+langchain-openai
+langchain
+qdrant-client
+langchain-core

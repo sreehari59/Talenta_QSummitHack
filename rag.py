@@ -9,16 +9,16 @@ from langchain_core.prompts import PromptTemplate
 
 class RagModel():
     def __init__(self, api_keys, qdrant_api_key, qdrant_url, qdrant_collection_name,
-                embedding_model, model="gpt-4o-mini", number_of_doc = 5):
+                embedding_model="text-embedding-3-large", model="gpt-4o-mini", number_of_doc = 5):
         self.apikeys = api_keys
         self.qdrant_api_key = qdrant_api_key
         self.qdrant_url = qdrant_url
         self.qdrant_collection_name = qdrant_collection_name
         self.model = model
         self.number_of_doc = number_of_doc
-        self.embedding = OpenAIEmbeddings( api_key = api_keys, model="text-embedding-3-large")
+        self.embedding = OpenAIEmbeddings( api_key = api_keys, model= embedding_model)
 
-    def retrieve_data(self, user_input, resolved_ticket_flag):
+    def retrieve_data(self, user_input, number_of_doc, resolved_ticket_flag):
         
         qdrant = QdrantVectorStore.from_existing_collection(
                             embedding = self.embedding,
@@ -27,15 +27,14 @@ class RagModel():
                             api_key = self.qdrant_api_key,
                         )
         
-        # This is for metadata filtering. Only tickets which are Resolved will only be considered.
         if resolved_ticket_flag:
             filters = models.Filter(must=[models.FieldCondition(
                                 key="metadata.absolute",
                                 match=models.MatchValue(value=True),
                             ),])
-            qdrant_retriever = qdrant.as_retriever(search_type="similarity", search_kwargs={"k": self.number_of_doc, "filter": filters})
+            qdrant_retriever = qdrant.as_retriever(search_type="similarity", search_kwargs={"k": number_of_doc + 2, "filter": filters})
         else:
-            qdrant_retriever = qdrant.as_retriever(search_type="similarity", search_kwargs={"k": self.number_of_doc})
+            qdrant_retriever = qdrant.as_retriever(search_type="similarity", search_kwargs={"k": number_of_doc + 2})
             
         template =  """Role: System
                         You are an staffing assistant designed to find the right candidates based on the given project requirements and description.
@@ -43,7 +42,6 @@ class RagModel():
 
                         GUIDELINES:                        
                         1. Never answer from your knowledge.
-                        
 
                         {context}
                         Based ONLY on the provided candidates, suggest who would be the right fit for the project description:
@@ -72,11 +70,13 @@ class RagModel():
                            metadata={
                                "name": row["name"],
                                "role": row["role"],
+                               "description": row["description"],
+                               "seniority": row["seniority"],
                                "languages_spoken":', '.join(row['languages_spoken']),
                                "certificates":', '.join(row['certificates']),
                                "technologies":', '.join(row['technologies']),
                                     }
-                                    )
+                                )
             docs.append(doc)
         print("embedding_model:",self.embedding)
         qdrant = QdrantVectorStore.from_documents(
