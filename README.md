@@ -21,6 +21,9 @@ Participants are invited to explore how intelligent agents—each with specific 
 
 # Installation and Setup
 
+## For the Back End 
+Please use the below steps to run the back end code
+
 - Create an environment and activate it
 - Create `.env` file and update the OpenAI API, Qdrant API Key
 - Setup [qdrant](https://qdrant.tech/). Note: I have used qdrant cloud service. By setting up the cloud service one would get qdrant_url and qdrant_api_key. After uploading the documents to the qdrant cloud one would get the qdrant_collection_name 
@@ -41,6 +44,10 @@ pip install -r requirements.txt
 ```
 python main.py
 ```
+
+## For the Front end 
+Please use the below step to run the front end code
+- Please https://github.com/jordibernandi/q_hack_25_exxeta_fe
 
 # Architecture
 
