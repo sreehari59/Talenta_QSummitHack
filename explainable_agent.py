@@ -14,11 +14,6 @@ class ExplanationAgent:
             candidate_profile (str): Description of the candidate's skills and experience.
             cosine_similarity (str): Cosine similarity score between 0 and 1.
 
-        Returns:
-            dict: {
-                'explanation': str,
-                'score': str (percentage format)
-            }
         """
         prompt = (
             f"""Project Requirement: {project_requirement}\n
