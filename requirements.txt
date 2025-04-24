@@ -6,3 +6,5 @@ langchain-openai
 langchain
 qdrant-client
 langchain-core
+secure-smtplib
+openai

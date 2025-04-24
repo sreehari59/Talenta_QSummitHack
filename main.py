@@ -1,8 +1,8 @@
 from flask import Flask, jsonify, request
 from rag import RagModel
-from utils import relevant_profiles, weighted_relevant_profiles, sort_by_total_score
+from utils import relevant_profiles, weighted_relevant_profiles, sort_by_total_score, build_company_email_prompt, build_candidate_email_prompt, generate_email, send_email
 from flask_cors import CORS
-
+from openai import OpenAI
 from dotenv import dotenv_values
 config = dotenv_values(".env")
 
@@ -97,6 +97,35 @@ def weighted_recommend_candidates():
     sorted_recommended_candidates = sort_by_total_score(initial_recommended_candidates)    
 
     return jsonify(sorted_recommended_candidates)
+
+@app.route("/email_sender", methods=["POST"])
+def postME():
+    client = OpenAI(
+            api_key=os.environ.get("OPEN_AI_KEY"),
+        )
+    data = request.get_json()
+    company_name = data['project']['projectApplication']['businessDetails']['name']
+    contact_name = data['project']['projectApplication']['businessDetails']['contactPerson']['name']
+    project_name = data['project']['projectApplication']['projectDetails']['projectName']
+    project_description = data['project']['projectApplication']['projectDetails']['description']
+    project_requirements = data['project']['projectApplication']['projectDetails']['requirements']
+    project_skills = [project_requirement['skill'] for project_requirement in project_requirements]
+
+    candidates_list = data['candidates']
+
+    # Send to the client
+    prompt = build_company_email_prompt(company_name, contact_name, project_name, project_skills, candidates_list)
+    # print(prompt)
+    subject, body = generate_email(prompt)
+    send_email('hackathon.hyw.2025@gmail.com', subject, body)
+    
+    # Send to the consultants
+    prompt = build_candidate_email_prompt(company_name, contact_name, project_name, project_description, candidates_list)
+    # print(prompt)
+    subject, body = generate_email(prompt)
+    send_email('hackathon.hyw.2025@gmail.com', subject, body)
+    
+    return jsonify({"message": "Emails sent successfully"}), 200
 
 
 if __name__ == '__main__':
