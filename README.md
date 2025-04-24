@@ -12,6 +12,7 @@ Participants are invited to explore how intelligent agents—each with specific 
 - Automate coordination between talent and project needs
 
 Please find our solution here [link](https://docs.google.com/presentation/d/1jNyJkrCoF0pRVaoN3pkGt1MRAW1R48YkHBjhtMJAEqI/edit?usp=sharing)
+Please find the vidoe to our [solution](https://drive.google.com/file/d/1bqqmV6B4WliDBDeI8Vnmh4CH2aOgs5__/view)
 
 # Tech Stack
 - Qdrant Vector Database
