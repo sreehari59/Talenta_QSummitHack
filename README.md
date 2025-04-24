@@ -11,6 +11,8 @@ Participants are invited to explore how intelligent agents—each with specific 
 - Recommend relevant opportunities dynamically
 - Automate coordination between talent and project needs
 
+Please find our solution here [link](https://docs.google.com/presentation/d/1jNyJkrCoF0pRVaoN3pkGt1MRAW1R48YkHBjhtMJAEqI/edit?usp=sharing)
+
 # Tech Stack
 - Qdrant Vector Database
 - Python
