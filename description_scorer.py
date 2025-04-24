@@ -29,7 +29,7 @@ class DescriptionScoringAgent:
             
         )
 
-        description_explanation = response.choices[0].message.content.split("Description_Score: ")[0]
+        description_explanation = response.choices[0].message.content.split("Description_Score: ")[0].split("Explanation: ")[1]
         description_score = response.choices[0].message.content.split("Description_Score: ")[1]
 
         return description_score, description_explanation
