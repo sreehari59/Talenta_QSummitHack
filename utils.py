@@ -17,7 +17,7 @@ def relevant_profiles(api_key, project_details, response, number_of_profiles):
             similarity_score = response[i][1]
 
             profile_details = f"""Role: {role}-Technologies: {technologies}-Candidate description: {profile_description}"""
-            explaination, score = explainable_ai_agent.explain_match(project_details, profile_details, similarity_score)
+            explanation, score = explainable_ai_agent.explain_match(project_details, profile_details, similarity_score)
             
             specific_skill_relevant_profiles.append({
                 "profile_name": profile_name,
@@ -28,7 +28,7 @@ def relevant_profiles(api_key, project_details, response, number_of_profiles):
                 "profile_description":profile_description,
                 "seniority":seniority,
                 "sim_score": score,
-                "explaination": explaination
+                "explanation": explanation
             })
 
         return specific_skill_relevant_profiles 
