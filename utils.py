@@ -116,3 +116,16 @@ def weighted_relevant_profiles(api_key, project_details, response, number_of_pro
             })
 
         return specific_skill_relevant_profiles 
+
+def sort_by_total_score(data):
+    sorted_data = []  
+    for inner_list in data:
+        if not isinstance(inner_list, list):
+            sorted_data.append(inner_list) 
+            continue
+
+        # Sort the inner list using the total_score as the key, in descending order
+        sorted_inner_list = sorted(inner_list, key=lambda x: x.get('total_score', 0), reverse=True)
+        sorted_data.append(sorted_inner_list) 
+
+    return sorted_data

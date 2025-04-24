@@ -28,7 +28,7 @@ class SeniorityScoringAgent:
             
         )
 
-        seniority_explanation = response.choices[0].message.content.split("Seniority_Score: ")[0].strip()
+        seniority_explanation = response.choices[0].message.content.split("Seniority_Score: ")[0].split("Explanation: ")[1]
         seniority_score = response.choices[0].message.content.split("Seniority_Score: ")[1]
 
         return seniority_score, seniority_explanation

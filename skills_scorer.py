@@ -31,7 +31,7 @@ class SkillScoringAgent:
             
         )
 
-        skills_explanation = response.choices[0].message.content.split("Skills_Score:")[0].strip()
+        skills_explanation = response.choices[0].message.content.split("Skills_Score:")[0].split("Explanation: ")[1].strip()
         skills_score = response.choices[0].message.content.split("Skills_Score: ")[1]
 
         return skills_score, skills_explanation

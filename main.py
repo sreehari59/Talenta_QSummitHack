@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from rag import RagModel
-from utils import relevant_profiles, weighted_relevant_profiles
+from utils import relevant_profiles, weighted_relevant_profiles, sort_by_total_score
 from flask_cors import CORS
 
 from dotenv import dotenv_values
@@ -94,8 +94,9 @@ def weighted_recommend_candidates():
                                                                         project_description, skill_required,
                                                                         location, recommended_seniority))
 
+    sorted_recommended_candidates = sort_by_total_score(initial_recommended_candidates)    
 
-    return jsonify(initial_recommended_candidates)
+    return jsonify(sorted_recommended_candidates)
 
 
 if __name__ == '__main__':

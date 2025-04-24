@@ -45,7 +45,7 @@ class GeoLangScoringAgent:
             
         )
 
-        geo_lang_explanation = response.choices[0].message.content.split("Language_Score: ")[0]
+        geo_lang_explanation = response.choices[0].message.content.split("Language_Score: ")[0].split("Explanation: ")[1]
         geo_lang_score = response.choices[0].message.content.split("Language_Score: ")[1]
 
         return geo_lang_score, geo_lang_explanation
