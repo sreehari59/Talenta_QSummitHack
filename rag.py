@@ -35,29 +35,36 @@ class RagModel():
             qdrant_retriever = qdrant.as_retriever(search_type="similarity", search_kwargs={"k": number_of_doc + 2, "filter": filters})
         else:
             qdrant_retriever = qdrant.as_retriever(search_type="similarity", search_kwargs={"k": number_of_doc + 2})
+
+        sim_response = qdrant.similarity_search_with_score(user_input,  number_of_doc + 2)
+        # print(sim_response[0])
+        # print("Score",sim_response[0][1])
+        # print("Score",sim_response[0][0].metadata.get("technologies"))
+
+        return sim_response
             
-        template =  """Role: System
-                        You are an staffing assistant designed to find the right candidates based on the given project requirements and description.
-                        Your task is to analyze the project details
+        # template =  """Role: System
+        #                 You are an staffing assistant designed to find the right candidates based on the given project requirements and description.
+        #                 Your task is to analyze the project details
 
-                        GUIDELINES:                        
-                        1. Never answer from your knowledge.
+        #                 GUIDELINES:                        
+        #                 1. Never answer from your knowledge.
 
-                        {context}
-                        Based ONLY on the provided candidates, suggest who would be the right fit for the project description:
-                        Project Requirement: {input}
-                        Helpful Answer:"""
+        #                 {context}
+        #                 Based ONLY on the provided candidates, suggest who would be the right fit for the project description:
+        #                 Project Requirement: {input}
+        #                 Helpful Answer:"""
         
-        llm = ChatOpenAI(model=self.model, api_key = self.apikeys, temperature = 0.0)
+        # llm = ChatOpenAI(model=self.model, api_key = self.apikeys, temperature = 0.0)
 
-        prompt = PromptTemplate(
-            template=template, input_variables=["context", "input"]
-        )
+        # prompt = PromptTemplate(
+        #     template=template, input_variables=["context", "input"]
+        # )
         
-        question_answer_chain = create_stuff_documents_chain(llm, prompt)
-        rag_chain = create_retrieval_chain(qdrant_retriever, question_answer_chain)
-        rag_response = rag_chain.invoke({"input": user_input})
-        return rag_response 
+        # question_answer_chain = create_stuff_documents_chain(llm, prompt)
+        # rag_chain = create_retrieval_chain(qdrant_retriever, question_answer_chain)
+        # rag_response = rag_chain.invoke({"input": user_input})
+        # return rag_response 
     
     def upload_data(self, data):
         docs = []
@@ -89,4 +96,5 @@ class RagModel():
                 )
         
         return self.qdrant_collection_name
+
     

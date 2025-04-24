@@ -16,6 +16,7 @@ def recommend_candidates():
     api_key = config["OPEN_AI_KEY"]
     embedding_model = config["OPEN_AI_EMBEDDING_MODEL"]
     model = config["OPEN_AI_MODEL_NAME"]
+
     rag = RagModel(api_key, config["QDRANT_API_KEY"], config["QDRANT_URL"], 
                             config["QDRANT_COLLECTION_NAME"], embedding_model, model, 5)
 
@@ -30,8 +31,8 @@ def recommend_candidates():
     for i in range(total_number_of_requirements):
         if len(data["projectApplication"]["projectDetails"]["requirements"][i]) < 2:
             skill_required = data["projectApplication"]["projectDetails"]["requirements"][i]["skill"]
-            amount_required = data["projectApplication"]["projectDetails"]["requirements"][i]["amount"]
-            recommended_seniority = data["projectApplication"]["projectDetails"]["requirements"][i]["recommendedSeniority"]
+            amount_required = 1
+            recommended_seniority = ""
         else:
             skill_required = data["projectApplication"]["projectDetails"]["requirements"][i]["skill"]
             amount_required = data["projectApplication"]["projectDetails"]["requirements"][i]["amount"]
@@ -42,13 +43,13 @@ def recommend_candidates():
         print("recommended_seniority",recommended_seniority)
 
         project_details = f"""
-        Project Name: {project_name}-Project Description: {project_description}-Required Skill: {project_description}-Recommended Seniority: {project_description}
+        Project Name: {project_name}-Project Description: {project_description}-Required Skill: {skill_required}-Recommended Seniority: {recommended_seniority}
         """
         response = rag.retrieve_data(project_details, amount_required, False)
-        recommended_candidates.append(relevant_profiles(response, amount_required + 2))
+        recommended_candidates.append(relevant_profiles(api_key, project_details, response, amount_required + 2))
 
     return jsonify(recommended_candidates)
-    # return {"response" : "All good"}
+    # return {"response" : "True"}
 
 if __name__ == '__main__':
     app.run(debug=True)
