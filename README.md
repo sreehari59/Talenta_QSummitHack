@@ -18,7 +18,6 @@ Participants are invited to explore how intelligent agents—each with specific 
 - OpenAI
 - Flask
 - SMTP
-- 
 
 # Installation and Setup
 
